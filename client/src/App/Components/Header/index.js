@@ -4,19 +4,21 @@ import { Header, NavbarLinksContainer, Link } from './Components';
 import Logo from '../../../resources/images/logo.png';
 
 const PokemonLogo = styled.img`
-  height: 60px;
+  height: 50px;
 `;
 
 export default () => (
   <Header>
-    <Link to="/" nopadding="">
+    <Link to="/">
       <PokemonLogo src={Logo} />
     </Link>
     <NavbarLinksContainer>
       <Link to="/about">
-        <i className="fas fa-info-circle" />
-        {' '}
+        <div style={{ marginTop: '12px' }}>
+          <i className="fas fa-info-circle" />
+          {' '}
         About
+        </div>
       </Link>
     </NavbarLinksContainer>
   </Header>

@@ -7,7 +7,7 @@ export default class Container extends Component {
     return (
       <div>
         <Header />
-        <Body/>
+        <Body />
       </div>
     );
   }

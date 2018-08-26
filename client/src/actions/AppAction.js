@@ -1,10 +1,12 @@
 import Axios from 'axios';
 import _ from 'lodash';
-import { GET_POKEMONS, SET_NEXT_POKEMONS_PAGE, INNER_POKEMONS } from '../actionTypes/ActionTypes';
+import {
+  GET_POKEMONS, SET_NEXT_POKEMONS_PAGE, INNER_POKEMONS, SET_POKEMON_INFO,
+} from '../actionTypes/ActionTypes';
 
 export const getPokemonsAction = () => (dispatch, getState) => new Promise((resolve, reject) => {
   if (_.size(getState().AppReducer.pokemons) === 0) {
-    Axios.get('https://pokeapi.co/api/v2/pokemon/')
+    Axios.get('/pokemon/')
       .then((response) => {
         dispatch({
           type: GET_POKEMONS,
@@ -43,4 +45,23 @@ export const getNextPokemonPage = url => dispatch => new Promise((resolve, rejec
   } else {
     resolve();
   }
+});
+
+export const setPokemonInfo = pokemonName => (dispatch, getState) => new Promise((resolve, reject) => {
+  if (!getState().AppReducer.pokemonsInfo[pokemonName]) {
+    Axios.get(`/pokemon/${pokemonName}`)
+      .then((response) => {
+        dispatch({
+          type: SET_POKEMON_INFO,
+          payload: response.data,
+        });
+        resolve();
+      })
+      .catch((error) => {
+        reject();
+        alert('Error');
+        console.error('Error:', error);
+      });
+  }
+  resolve();
 });

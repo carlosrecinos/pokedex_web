@@ -6,20 +6,25 @@ import { connect } from 'react-redux';
 
 import {
   PokemonList as PokemonListStyledComponent,
-  PokemonCard, CardTitle, CardBody, PokemonBall, CardImage,
+  PokemonCard, CardTitle, CardBody, PokemonBall, CardImage, CloseButton, PokemonModal, PokemonInfo,
 } from './Components';
 import { getPokemonsAction, getNextPokemonPage } from '../../../actions/AppAction';
+import InfoBox from './InfoBox';
 
-const getImageUrl = (url) => {
+const getImageUrl = (url, returnId) => {
   const baseUrl = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/';
   const newUrl = url.slice(0, -1);
   const index = newUrl.lastIndexOf('/');
   const id = newUrl.slice(parseInt(index, 10) + 1);
+  if (returnId) {
+    return id;
+  }
   return `${baseUrl}${id}.png`;
 };
 class PokemonList extends Component {
   state = {
     alreadyReached: false,
+    clickedCard: {},
   }
 
   componentDidMount() {
@@ -48,7 +53,6 @@ class PokemonList extends Component {
     const pokemonsQuantity = _.size(pokemons);
     if (this.isBottom(wrappedElement)) {
       if (!alreadyReached || (pokemonsQuantity === 0)) {
-        console.log('ASDSA');
         nextPage(next);
         this.setState({
           alreadyReached: true,
@@ -59,21 +63,62 @@ class PokemonList extends Component {
 
   isBottom = el => el.getBoundingClientRect().bottom <= window.innerHeight
 
+  handleCardClick = (e, pokemon, toOpen) => {
+    e.stopPropagation();
+    const { clickedCard } = this.state;
+    this.setState({
+      clickedCard: {
+        [pokemon.name]: toOpen,
+      },
+    });
+    setTimeout(() => {
+      console.log(this.state);
+    }, 1000);
+  }
+
   render() {
+    const { clickedCard } = this.state;
     const { pokemons } = this.props;
     return (
       <PokemonListStyledComponent>
         {
           _.map(pokemons, pokemon => (
-            <PokemonCard key={pokemon.name}>
-              <CardTitle>{pokemon.name}</CardTitle>
-              <PokemonBall />
-              <CardBody>
-                <LazyLoad>
-                  <CardImage src={getImageUrl(pokemon.url)} />
-                </LazyLoad>
-              </CardBody>
-            </PokemonCard>
+            <PokemonModal
+              clicked={clickedCard[pokemon.name]}
+              onClick={(e) => { this.handleCardClick(e, pokemon, false); }}
+              key={pokemon.name}
+            >
+              <PokemonCard
+                clicked={clickedCard[pokemon.name]}
+                onClick={(e) => { this.handleCardClick(e, pokemon, true); }}
+              >
+                <CardTitle>
+                  {pokemon.name}
+                  {
+                clickedCard[pokemon.name]
+                  ? (
+                    <CloseButton
+                      onClick={(e) => { this.handleCardClick(e, pokemon, false); }}
+                    >
+                    X
+                    </CloseButton>
+                  )
+                  : ''
+              }
+                </CardTitle>
+                <PokemonBall />
+                <CardBody>
+                  <LazyLoad>
+                    <CardImage src={getImageUrl(pokemon.url)} />
+                  </LazyLoad>
+                </CardBody>
+              </PokemonCard>
+              {
+                clickedCard[pokemon.name]
+                  ? <InfoBox clicked={clickedCard[pokemon.name]} pokemon={pokemon} pokemonId={getImageUrl(pokemon.url, true)} />
+                  : <div />
+              }
+            </PokemonModal>
           ))
         }
       </PokemonListStyledComponent>

@@ -1,8 +1,11 @@
-import { GET_POKEMONS, INNER_POKEMONS, SET_NEXT_POKEMONS_PAGE } from '../actionTypes/ActionTypes';
+import {
+  GET_POKEMONS, INNER_POKEMONS, SET_NEXT_POKEMONS_PAGE, SET_POKEMON_INFO,
+} from '../actionTypes/ActionTypes';
 
 const AppReducer = (state = {
   pokemons: {},
   next: '',
+  pokemonsInfo: {},
 }, action) => {
   switch (action.type) {
     case GET_POKEMONS: {
@@ -24,6 +27,15 @@ const AppReducer = (state = {
       return {
         ...state,
         next: action.payload,
+      };
+    }
+    case SET_POKEMON_INFO: {
+      return {
+        ...state,
+        pokemonsInfo: {
+          ...state.pokemonsInfo,
+          [action.payload.name]: action.payload,
+        },
       };
     }
 
