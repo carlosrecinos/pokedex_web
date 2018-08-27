@@ -14,7 +14,7 @@ export default () => (
     </Link>
     <NavbarLinksContainer>
       <Link to="/about">
-        <div style={{ marginTop: '12px' }}>
+        <div>
           <i className="fas fa-info-circle" />
           {' '}
         About

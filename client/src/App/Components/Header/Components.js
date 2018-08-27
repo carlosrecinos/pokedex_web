@@ -14,12 +14,12 @@ export const Link = styled(RouterLink)`
   font-size: 20px;
   color: #FFDE00;
   font-family: PokemonSolidFont;
-  padding: 5px;
-  &:hover{
+  padding-right: 5px;
+  padding-left: 5px;
+  &:hover {
     background-color: #AA0000;
     color:#B3A125;  
-    font-family: PokemonSolidFont;
-}
+  }
 `;
 
 export const NavbarLinksContainer = styled.div`

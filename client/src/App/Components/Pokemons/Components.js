@@ -49,6 +49,9 @@ export const PokemonCard = styled.div`
       height: 400px; 
       z-index: 2;
       margin-left: 10%;
+      @media (max-width: 1300px) {
+        display: none;
+      }
       `;
     }
     return `
@@ -77,7 +80,9 @@ export const PokemonModal = styled.div`
   height: 100%;
   z-index: 2000;
 ` : '')
-}`;
+}
+  
+`;
 
 export const PokemonBall = styled.div`
   width: 15px;
@@ -91,18 +96,20 @@ export const PokemonBall = styled.div`
   z-index: 0
 `;
 
-export const CardTitle = styled.p`
-  padding: 10px;
+export const CardTitle = styled.div`
+  padding: 0px;
   font-family: PokemonSolidFont;
+  height: 60px;
   color: white;
-  font-size: 25px;  
+  font-size: 20px;  
   text-align: center;
   background-color: #CC0006;
   margin: 0px;
   border-radius: 5px 5px 0px 0px;
   border-bottom: 3px solid black;
   text-shadow: 1px 1px #000,
-              -1px -1px #000
+              -1px -1px #000;
+              
 `;
 
 export const CardBody = styled.div`
@@ -115,10 +122,13 @@ export const CardImage = styled.img`
   margin: 0 auto;
 `;
 
-export const CloseButton = styled.div`
+export const CloseButton = styled.p`
+  display: inline-block;
   color: #EEE;
   float: right;
   cursor: pointer;
+  margin: 0px;
+  padding-right: 10px;
   &: hover {
     color: #555;
   }
@@ -142,15 +152,34 @@ export const PokemonInfo = styled.div`
     if (clicked) {
       return `
         display: flex;
-        justify-content: space-between;
+        flex-direction: column;
+        justify-content: flex-start;
         width: 700px;
-        height: 500px;
+        height: 80%;
         z-index: 2;
         position: fixed;
         top: 10%;
+        bottom: 10%;
         right: 10%;
         background-color: #F5EDE3;
         animation: ${showInfoAnimation} 200ms linear;
+        @media (max-width: 1300px) {
+          width: 80%;
+          height: 80%;
+          margin: 0px auto;
+          left: 10%;
+          right: 10%;
+        }
+        @media (max-width: 600px) {
+          top: 5%;
+          bottom: 5%;
+          width: 90%;
+          height: 90%;
+          margin: 0px auto;
+          left: 5%;
+          right: 5%;
+          bottom: 5%;
+        }
 `;
     }
     return '';
@@ -165,3 +194,8 @@ export const InfoTitle = styled.div`
   text-shadow: 1px 1px #000,
               -1px -1px #000
 `;
+
+export const InfoBody = styled.div`
+  height: 100%;
+`
+;

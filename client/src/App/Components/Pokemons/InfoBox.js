@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import _ from 'lodash';
 import { connect } from 'react-redux';
-import { PokemonInfo, InfoTitle } from './Components';
+import { PokemonInfo, InfoTitle, InfoBody } from './Components';
 import { setPokemonInfo } from '../../../actions/AppAction';
+import Gallery from './MiniGallery';
 
 class InfoBox extends Component {
   state = {
@@ -16,9 +18,21 @@ class InfoBox extends Component {
 
   render() {
     const { pokemon, clicked } = this.props;
+    const images = [];
+    _.forEach(pokemon.sprites, (image, key) => {
+      if (image) {
+        images.push({
+          url: image,
+          name: key,
+        });
+      }
+    });
     return (
       <PokemonInfo onClick={(e) => { e.stopPropagation(); }} clicked={clicked}>
         <InfoTitle>{pokemon.name}</InfoTitle>
+        <InfoBody>
+          <Gallery images={images} />
+        </InfoBody>
       </PokemonInfo>
     );
   }

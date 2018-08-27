@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 
 import {
   PokemonList as PokemonListStyledComponent,
-  PokemonCard, CardTitle, CardBody, PokemonBall, CardImage, CloseButton, PokemonModal, PokemonInfo,
+  PokemonCard, CardTitle, CardBody, PokemonBall, CardImage, CloseButton, PokemonModal,
 } from './Components';
 import { getPokemonsAction, getNextPokemonPage } from '../../../actions/AppAction';
 import InfoBox from './InfoBox';
@@ -65,15 +65,11 @@ class PokemonList extends Component {
 
   handleCardClick = (e, pokemon, toOpen) => {
     e.stopPropagation();
-    const { clickedCard } = this.state;
     this.setState({
       clickedCard: {
         [pokemon.name]: toOpen,
       },
     });
-    setTimeout(() => {
-      console.log(this.state);
-    }, 1000);
   }
 
   render() {
