@@ -12,8 +12,8 @@ class InfoBox extends Component {
   }
 
   componentDidMount() {
-    const { pokemonId } = this.props;
-    this.props.setPokemonInfo(pokemonId);
+    const { pokemonId, setPokemonInfo, pokemonProp } = this.props;
+    setPokemonInfo(pokemonId, pokemonProp.name);
   }
 
   render() {
@@ -41,11 +41,11 @@ InfoBox.defaultProps = {
   pokemon: {},
 };
 const mapStateToProps = (store, ownProps) => ({
-  pokemon: store.AppReducer.pokemonsInfo[ownProps.pokemon.name],
+  pokemon: store.AppReducer.pokemonsInfo[ownProps.pokemonProp.name],
 });
 const mapDispatchToProps = dispatch => ({
-  setPokemonInfo(name) {
-    return dispatch(setPokemonInfo(name));
+  setPokemonInfo(id, name) {
+    return dispatch(setPokemonInfo(id, name));
   },
 });
 

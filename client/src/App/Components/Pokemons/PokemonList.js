@@ -111,7 +111,7 @@ class PokemonList extends Component {
               </PokemonCard>
               {
                 clickedCard[pokemon.name]
-                  ? <InfoBox clicked={clickedCard[pokemon.name]} pokemon={pokemon} pokemonId={getImageUrl(pokemon.url, true)} />
+                  ? <InfoBox clicked={clickedCard[pokemon.name]} pokemonProp={pokemon} pokemonId={getImageUrl(pokemon.url, true)} />
                   : <div />
               }
             </PokemonModal>

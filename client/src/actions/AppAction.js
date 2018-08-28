@@ -47,9 +47,9 @@ export const getNextPokemonPage = url => dispatch => new Promise((resolve, rejec
   }
 });
 
-export const setPokemonInfo = pokemonName => (dispatch, getState) => new Promise((resolve, reject) => {
+export const setPokemonInfo = (pokemonId, pokemonName) => (dispatch, getState) => new Promise((resolve, reject) => {
   if (!getState().AppReducer.pokemonsInfo[pokemonName]) {
-    Axios.get(`/pokemon/${pokemonName}`)
+    Axios.get(`/pokemon/${pokemonId}`)
       .then((response) => {
         dispatch({
           type: SET_POKEMON_INFO,
