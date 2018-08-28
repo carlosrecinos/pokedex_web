@@ -8,9 +8,12 @@ export const Container = styled.div`
   justify-content: space-around;
   z-index: 100;
   margin: 0 auto;
+  border: 3px solid #9F7F4E;
+  border-radius: 4px;
   `;
 export const ImageBox = styled.div`
-  border: 3px solid #9F7F4E;
+  border: ${({ active }) => (active ? '3' : '0')}px solid #9F7F4E;
+  top: ${({ active }) => (active ? '-3' : '0')}px;
   cursor: ${({ active }) => (active ? 'pointer' : 'auto')};
   border-radius: 4px;
   overflow: hidden;
@@ -39,7 +42,7 @@ export const ChangeImageButtom = styled.div`
   ${({ left }) => left && 'left: 0px;'}
   ${({ right }) => right && 'right: 0px;'}
   transition: opacity 200ms ease-in-out;
-  height: 102%;
+  height: 101%;
   width: 7%;
   z-index: 102;
   &: hover {
