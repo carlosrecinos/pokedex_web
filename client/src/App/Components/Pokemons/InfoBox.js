@@ -2,9 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { connect } from 'react-redux';
-import { PokemonInfo, InfoTitle, InfoBody } from './Components';
+import {
+  PokemonInfo, InfoTitle, InfoBody, PokemonTypes, PokemonType, BasicInfo, XpContainer, WeightContainer,
+} from './Components';
 import { setPokemonInfo } from '../../../actions/AppAction';
 import Gallery from './MiniGallery';
+import { Host } from '../../../Constants';
 
 class InfoBox extends Component {
   state = {
@@ -32,6 +35,23 @@ class InfoBox extends Component {
         <InfoTitle>{pokemon.name}</InfoTitle>
         <InfoBody>
           <Gallery images={images} />
+          <BasicInfo>
+            <PokemonTypes>
+              {
+                _.map(pokemon.types, type => (
+                  <PokemonType title={type.type.name} src={`${Host}/images/${type.type.name}.png`} />
+                ))
+              }
+            </PokemonTypes>
+            <WeightContainer>
+              <b>Weight: </b>
+              {`${parseInt(pokemon.weight, 10) / 10} lbs.`}
+            </WeightContainer>
+            <XpContainer>
+              <b>XP: </b>
+              {pokemon.base_experience}
+            </XpContainer>
+          </BasicInfo>
         </InfoBody>
       </PokemonInfo>
     );

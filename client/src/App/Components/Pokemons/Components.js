@@ -156,7 +156,7 @@ export const PokemonInfo = styled.div`
         justify-content: flex-start;
         width: 700px;
         height: 80%;
-        z-index: 2;
+        z-index: 103;
         position: fixed;
         top: 10%;
         bottom: 10%;
@@ -197,5 +197,34 @@ export const InfoTitle = styled.div`
 
 export const InfoBody = styled.div`
   height: 100%;
-`
-;
+`;
+export const BasicInfo = styled.div`
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+  width: 100%;
+`;
+export const PokemonTypes = styled.div`
+  width: 30%;
+  display: flex;
+  justify-content: space-around;
+`;
+
+export const PokemonType = styled.img`
+  width: 50px;
+  height: 60px;
+  cursor: pointer;
+  &: hover {
+    transform: scale(1.2);
+  }
+`;
+
+export const XpContainer = styled.div`
+  margin-top: 20px;
+  font-family: Roboto;
+`;
+
+export const WeightContainer = styled.div`
+  margin-top: 20px;
+  font-family: Roboto;
+`;
