@@ -1,0 +1,27 @@
+{
+  "name": "pokedex",
+  "version": "1.0.0",
+  "description": "my pokedex",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "pokedex-promise-v2": "^3.1.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/carlosrecinos/pokedex.git"
+  },
+  "author": "Carlos Recinos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/carlosrecinos/pokedex/issues"
+  },
+  "homepage": "https://gitlab.com/carlosrecinos/pokedex#README"
+}

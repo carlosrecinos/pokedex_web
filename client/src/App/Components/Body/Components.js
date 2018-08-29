@@ -1,7 +1,7 @@
-import styled from "styled-components";
-import Background from '../../../resources/images/background.png';
+import styled from 'styled-components';
+import { Host } from '../../../Constants';
 
 export const Body = styled.div`
-  background-image: url(${Background});
+  background-image: url(${Host}/images/background.png);
   min-height: 1000px;
-`
+`;

@@ -98,6 +98,7 @@ export const PokemonBall = styled.div`
 
 export const CardTitle = styled.div`
   padding: 0px;
+  position: relative;
   font-family: PokemonSolidFont;
   height: 60px;
   color: white;
@@ -124,12 +125,12 @@ export const CardImage = styled.img`
 
 export const CloseButton = styled.p`
   display: inline-block;
+  position: absolute;
+  right: 10px;
   color: #EEE;
-  float: right;
   cursor: pointer;
   margin: 0px;
-  padding-right: 10px;
-  &: hover {
+  &:hover {
     color: #555;
   }
 `;
@@ -155,17 +156,18 @@ export const PokemonInfo = styled.div`
         flex-direction: column;
         justify-content: flex-start;
         width: 700px;
-        height: 80%;
+        min-height: 80%;
         z-index: 103;
         position: fixed;
-        top: 10%;
-        bottom: 10%;
+        top: 5%;
+        overflow-y: scroll;
+        bottom: 5%;
         right: 10%;
         background-color: #F5EDE3;
         animation: ${showInfoAnimation} 200ms linear;
         @media (max-width: 1300px) {
           width: 80%;
-          height: 80%;
+          min-height: 80%;
           margin: 0px auto;
           left: 10%;
           right: 10%;
@@ -174,11 +176,10 @@ export const PokemonInfo = styled.div`
           top: 5%;
           bottom: 5%;
           width: 90%;
-          height: 90%;
+          min-height: 90%;
           margin: 0px auto;
           left: 5%;
           right: 5%;
-          bottom: 5%;
         }
 `;
     }
@@ -187,6 +188,7 @@ export const PokemonInfo = styled.div`
 `;
 export const InfoTitle = styled.div`
   width: 100%;
+  margin-top: 10px;
   color: #C6AD88;
   font-size: 30px;
   font-family: PokemonSolidFont;
@@ -198,14 +200,24 @@ export const InfoTitle = styled.div`
 export const InfoBody = styled.div`
   height: 100%;
 `;
-export const BasicInfo = styled.div`
+export const BrownBackground = styled.div`
   display: flex;
   justify-content: space-around;
+  flex-wrap: wrap;
+  background-color: #9F7F4E;
+  border-radius: 3px;
+  width: 40%;
+  margin: 5% 20px;
   margin-top: 20px;
-  width: 100%;
+  min-height: 75px;
+  align-items: center;
+  padding: 10px;
+  @media (max-width: 600px) {
+    width: 90%;
+  }
 `;
 export const PokemonTypes = styled.div`
-  width: 30%;
+  width: 100%;
   display: flex;
   justify-content: space-around;
 `;
@@ -220,11 +232,52 @@ export const PokemonType = styled.img`
 `;
 
 export const XpContainer = styled.div`
-  margin-top: 20px;
   font-family: Roboto;
 `;
 
 export const WeightContainer = styled.div`
-  margin-top: 20px;
   font-family: Roboto;
+`;
+
+export const InfoBoxLoaderContainer = styled.div`
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+`;
+
+export const blinking = keyframes`
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
+
+export const InfoBoxLoader = styled.img`
+  width: 300px;
+  height: 300px;
+  margin-top: 10%;
+  text-shadow: 5px 5px 5px #CCC;
+  animation: ${blinking} 1000ms ease-in-out infinite;
+  filter: blur(0px) contrast(0%) brightness(100%);
+`;
+
+export const InfoContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+`;
+
+export const BasicInfoTitle = styled.div`
+  width: 100%;
+  text-align: center;
+  font-size: 17px;
+  font-family: PokemonSolidFont;
+
 `;

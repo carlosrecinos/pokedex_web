@@ -6,6 +6,7 @@ const AppReducer = (state = {
   pokemons: {},
   next: '',
   pokemonsInfo: {},
+  lastOffset: 0,
 }, action) => {
   switch (action.type) {
     case GET_POKEMONS: {
@@ -26,7 +27,7 @@ const AppReducer = (state = {
     case SET_NEXT_POKEMONS_PAGE: {
       return {
         ...state,
-        next: action.payload,
+        lastOffset: (state.lastOffset + 20),
       };
     }
     case SET_POKEMON_INFO: {

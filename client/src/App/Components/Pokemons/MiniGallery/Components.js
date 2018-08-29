@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
   position: relative;
   display: flex;
-  width: 80%;
+  width: 90%;
   height: 300px;
   justify-content: space-around;
   z-index: 100;
@@ -30,9 +30,11 @@ export const ImageBox = styled.div`
   ${({ right }) => right
   && 'right: 0px;'
 }
-&: hover{
-  transform: ${({ active }) => (active ? 'scale(1.1)' : 'scale(1)')};
-}
+  display: flex;
+  justify-content: space-around;
+  &: hover{
+    transform: ${({ active }) => (active ? 'scale(1.1)' : 'scale(1)')};
+  }
 `;
 
 export const ChangeImageButtom = styled.div`
@@ -52,12 +54,13 @@ export const ChangeImageButtom = styled.div`
 
 export const SpriteImg = styled.img`
   position: absolute;
-  margin-top: 30px;
   height: 200px;
   width: 200px;
   z-index: ${({ active }) => (active ? '102' : '100')};
   ${({ left }) => left && 'right: 0px;'}
   ${({ right }) => right && 'left: 0px;'}
+  ${({ active }) => (active ? 'margin: 0px auto' : '')};
+  margin-top: 30px;
 `;
 export const ArrowDiv = styled.div`
   position: absolute;
@@ -89,24 +92,20 @@ export const CirclesContainer = styled.div`
   position: absolute;
   margin: 0 auto;
   height: 20px;
-  width: 200px;
   z-index: 105;
   display: flex;
   bottom: 30px;
   justify-content: space-around;
-  opacity: 0.5;
-  &: hover { 
-    opacity: 0.9;
-  }
+  opacity: 0.8;
 `;
 
 export const Circle = styled.div`
-  height: 20px;
-  width: 20px;
+  height: 15px;
+  width: 15px;
   border-radius: 50%;
-  margin: 0;
+  margin-left: 10px;
   background-color: black;
-  opacity: 0.5;
+  opacity: ${({ active }) => (active ? '1' : '0.5')};
   cursor: pointer;
   &: hover { 
     opacity: 0.9;

@@ -85,7 +85,11 @@ class Gallery extends Component {
           <CirclesContainer>
             {
             _.map(images, (image, index) => (
-              <Circle title={image.name} onClick={() => { this.setActiveImage(index); }} />
+              <Circle
+                active={showingPhoto === index}
+                title={image.name}
+                onClick={() => { this.setActiveImage(index); }}
+              />
             ))
             }
           </CirclesContainer>

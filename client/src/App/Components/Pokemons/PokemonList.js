@@ -63,6 +63,11 @@ class PokemonList extends Component {
 
   isBottom = el => el.getBoundingClientRect().bottom <= window.innerHeight
 
+changeBodyOverflow = (toHide) => {
+  const body = document.getElementsByTagName('body')[0];
+  body.style.overflowY = toHide ? 'hidden' : 'scroll';
+}
+
   handleCardClick = (e, pokemon, toOpen) => {
     e.stopPropagation();
     this.setState({
@@ -81,37 +86,45 @@ class PokemonList extends Component {
           _.map(pokemons, pokemon => (
             <PokemonModal
               clicked={clickedCard[pokemon.name]}
-              onClick={(e) => { this.handleCardClick(e, pokemon, false); }}
+              onClick={(e) => {
+                this.handleCardClick(e, pokemon, false);
+                this.changeBodyOverflow(false);
+              }}
               key={pokemon.name}
             >
               <PokemonCard
                 clicked={clickedCard[pokemon.name]}
-                onClick={(e) => { this.handleCardClick(e, pokemon, true); }}
+                onClick={(e) => {
+                  this.handleCardClick(e, pokemon, true);
+                  if (!clickedCard[pokemon.name]) {
+                    this.changeBodyOverflow(true);
+                  }
+                }}
               >
                 <CardTitle>
                   {pokemon.name}
                   {
-                clickedCard[pokemon.name]
-                  ? (
-                    <CloseButton
-                      onClick={(e) => { this.handleCardClick(e, pokemon, false); }}
-                    >
+                  clickedCard[pokemon.name]
+                    ? (
+                      <CloseButton
+                        onClick={(e) => { this.handleCardClick(e, pokemon, false); this.changeBodyOverflow(false); }}
+                      >
                     X
-                    </CloseButton>
-                  )
-                  : ''
-              }
+                      </CloseButton>
+                    )
+                    : ''
+                  }
                 </CardTitle>
                 <PokemonBall />
                 <CardBody>
-                  <LazyLoad>
+                  <LazyLoad height="80%">
                     <CardImage src={getImageUrl(pokemon.url)} />
                   </LazyLoad>
                 </CardBody>
               </PokemonCard>
               {
                 clickedCard[pokemon.name]
-                  ? <InfoBox clicked={clickedCard[pokemon.name]} pokemonProp={pokemon} pokemonId={getImageUrl(pokemon.url, true)} />
+                  ? <InfoBox imageSrc={getImageUrl(pokemon.url)} clicked={clickedCard[pokemon.name]} pokemonProp={pokemon} pokemonId={getImageUrl(pokemon.url, true)} />
                   : <div />
               }
             </PokemonModal>

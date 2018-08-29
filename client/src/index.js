@@ -7,7 +7,8 @@ import registerServiceWorker from './registerServiceWorker';
 import PokemonFont from './resources/fonts/pokemonFont.ttf';
 import PokemonSolidFont from './resources/fonts/pokemonSolidFont.ttf';
 
-Axios.defaults.baseURL = 'http://pokeapi.salestock.net/api/v2';
+// Axios.defaults.baseURL = 'http://pokeapi.co/api/v2';
+Axios.defaults.baseURL = 'http://192.168.1.10:5000/api/';
 
 injectGlobal`
   @font-face {

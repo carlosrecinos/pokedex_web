@@ -6,15 +6,16 @@ import {
 
 export const getPokemonsAction = () => (dispatch, getState) => new Promise((resolve, reject) => {
   if (_.size(getState().AppReducer.pokemons) === 0) {
-    Axios.get('/pokemon/')
+    const { lastOffset } = getState().AppReducer;
+    Axios.get(`/pokemon/?offset=${0}&&limit=${20}`)
       .then((response) => {
         dispatch({
           type: GET_POKEMONS,
-          payload: _.keyBy(response.data.results, 'name'),
+          payload: _.keyBy(response.data.data.results, 'name'),
         });
         dispatch({
           type: SET_NEXT_POKEMONS_PAGE,
-          payload: response.data.next,
+          payload: response.data.data.next,
         });
         resolve();
       })
@@ -24,36 +25,32 @@ export const getPokemonsAction = () => (dispatch, getState) => new Promise((reso
   }
 });
 
-export const getNextPokemonPage = url => dispatch => new Promise((resolve, reject) => {
-  console.log('object', url);
-  if (url) {
-    Axios.get(url)
-      .then((response) => {
-        dispatch({
-          type: INNER_POKEMONS,
-          payload: _.keyBy(response.data.results, 'name'),
-        });
-        dispatch({
-          type: SET_NEXT_POKEMONS_PAGE,
-          payload: response.data.next,
-        });
-        resolve();
-      })
-      .catch(() => {
-        reject();
+export const getNextPokemonPage = () => (dispatch, getState) => new Promise((resolve, reject) => {
+  console.log(getState().AppReducer);
+  const { lastOffset } = getState().AppReducer;
+  Axios.get(`/pokemon/?offset=${lastOffset + 21}&&limit=${20}`)
+    .then((response) => {
+      dispatch({
+        type: INNER_POKEMONS,
+        payload: _.keyBy(response.data.data.results, 'name'),
       });
-  } else {
-    resolve();
-  }
+      dispatch({
+        type: SET_NEXT_POKEMONS_PAGE,
+      });
+      resolve();
+    })
+    .catch(() => {
+      reject();
+    });
 });
 
-export const setPokemonInfo = (pokemonId, pokemonName) => (dispatch, getState) => new Promise((resolve, reject) => {
-  if (!getState().AppReducer.pokemonsInfo[pokemonName]) {
+export const setPokemonInfo = (pokemonId, pokemonName, forceFetch) => (dispatch, getState) => new Promise((resolve, reject) => {
+  if (!getState().AppReducer.pokemonsInfo[pokemonName] || forceFetch) {
     Axios.get(`/pokemon/${pokemonId}`)
       .then((response) => {
         dispatch({
           type: SET_POKEMON_INFO,
-          payload: response.data,
+          payload: response.data.data,
         });
         resolve();
       })
@@ -62,6 +59,7 @@ export const setPokemonInfo = (pokemonId, pokemonName) => (dispatch, getState) =
         alert('Error');
         console.error('Error:', error);
       });
+  } else {
+    resolve();
   }
-  resolve();
 });

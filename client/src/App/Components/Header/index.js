@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Header, NavbarLinksContainer, Link } from './Components';
-import Logo from '../../../resources/images/logo.png';
+import { Host } from '../../../Constants';
 
 const PokemonLogo = styled.img`
   height: 50px;
@@ -10,7 +10,7 @@ const PokemonLogo = styled.img`
 export default () => (
   <Header>
     <Link to="/">
-      <PokemonLogo src={Logo} />
+      <PokemonLogo src={`${Host}/images/logo.png`} />
     </Link>
     <NavbarLinksContainer>
       <Link to="/about">
