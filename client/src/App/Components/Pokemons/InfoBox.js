@@ -33,7 +33,8 @@ class InfoBox extends Component {
     const { pokemon, clicked, imageSrc } = this.props;
     const { loading } = this.state;
     const images = [];
-    _.forEach(pokemon.sprites, (image, key) => {
+    const images = _.filter(pokemon.sprites, (sprite) => typeof sprite === "string")
+    _.forEach(images, (image, key) => {
       if (image) {
         images.push({
           url: image,
