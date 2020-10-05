@@ -32,7 +32,6 @@ class InfoBox extends Component {
   render() {
     const { pokemon, clicked, imageSrc } = this.props;
     const { loading } = this.state;
-    const images = [];
     const images = _.filter(pokemon.sprites, (sprite) => typeof sprite === "string")
     _.forEach(images, (image, key) => {
       if (image) {

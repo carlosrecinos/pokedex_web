@@ -7,7 +7,7 @@ import {
 export const getPokemonsAction = () => (dispatch, getState) => new Promise((resolve, reject) => {
   if (_.size(getState().AppReducer.pokemons) === 0) {
     const { lastOffset } = getState().AppReducer;
-    Axios.get(`/pokemon/?offset=${0}&&limit=${20}`)
+    Axios.get(`/api/pokemon/?offset=${0}&&limit=${20}`)
       .then((response) => {
         dispatch({
           type: GET_POKEMONS,
@@ -28,7 +28,7 @@ export const getPokemonsAction = () => (dispatch, getState) => new Promise((reso
 export const getNextPokemonPage = () => (dispatch, getState) => new Promise((resolve, reject) => {
   console.log(getState().AppReducer);
   const { lastOffset } = getState().AppReducer;
-  Axios.get(`/pokemon/?offset=${lastOffset + 21}&&limit=${20}`)
+  Axios.get(`/api/pokemon/?offset=${lastOffset + 21}&&limit=${20}`)
     .then((response) => {
       dispatch({
         type: INNER_POKEMONS,
@@ -46,7 +46,7 @@ export const getNextPokemonPage = () => (dispatch, getState) => new Promise((res
 
 export const setPokemonInfo = (pokemonId, pokemonName, forceFetch) => (dispatch, getState) => new Promise((resolve, reject) => {
   if (!getState().AppReducer.pokemonsInfo[pokemonName] || forceFetch) {
-    Axios.get(`/pokemon/${pokemonId}`)
+    Axios.get(`/api/pokemon/${pokemonId}`)
       .then((response) => {
         dispatch({
           type: SET_POKEMON_INFO,

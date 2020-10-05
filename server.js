@@ -14,10 +14,13 @@ app.use((req, res, next) => {
   console.log('Body: ', JSON.stringify(req.body))
   next()
 })
+
 app.use((req, res, next) => {
   console.log('QueryStrings: ', JSON.stringify(req.query))
   next()
 })
 app.use('/api/', routes);
 
-app.use('/images', express.static('public'))
+app.use('/images', express.static('files'))
+
+app.use(express.static('public'))

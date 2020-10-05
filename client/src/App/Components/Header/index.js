@@ -10,7 +10,7 @@ const PokemonLogo = styled.img`
 export default () => (
   <Header>
     <Link to="/">
-      <PokemonLogo src={`${Host}/images/logo.png`} />
+      <PokemonLogo src={`/images/logo.png`} />
     </Link>
     <NavbarLinksContainer>
       <Link to="/about">
