@@ -5,11 +5,14 @@ const P = new Pokedex();
 const counter = {
   pokemonList: 0,
 };
+
 Router.get('/pokemon', (req, res) => {
   counter.pokemonList += 1;
-  const {offset, limit} = req.query;
+  const offset = parseInt(req.query.offset) || 0;
+  const limit = parseInt(req.query.limit) || 20;
+  
   console.log(`Request /pokemon/ quantity: ${counter.pokemonList}`)
-  P.getPokemonsList({ limit: limit || 20, offset: offset || 0 })
+  P.getPokemonsList({ limit, offset })
   .then((data) => {
     res.json({error: false, data})
   })
