@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Header, NavbarLinksContainer, Link } from './Components';
-import { Host } from '../../../Constants';
 
 const PokemonLogo = styled.img`
   height: 50px;

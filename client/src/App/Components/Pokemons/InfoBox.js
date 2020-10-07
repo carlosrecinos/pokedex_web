@@ -62,7 +62,7 @@ class InfoBox extends Component {
                       <PokemonTypes>
                         {
                         _.map(pokemon.types, type => (
-                          <PokemonType title={type.type.name} src={`${Host}/images/${type.type.name}.png`} />
+                          <PokemonType title={type.type.name} src={`/images/${type.type.name}.png`} />
                         ))
                       }
                       </PokemonTypes>
